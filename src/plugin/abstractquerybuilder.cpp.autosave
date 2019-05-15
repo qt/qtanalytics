@@ -1,0 +1,15 @@
+#include "abstractquerybuilder.h"
+
+HitBuilder::HitBuilder()
+{
+
+}
+
+HitBuilder::~HitBuilder()
+{
+}
+
+void HitBuilder::addQueryItem(const QString &key, const QString &value)
+{
+    m_query.addQueryItem(key, value);
+}

@@ -1,0 +1,42 @@
+project = QtAnalytics
+description = QtAnalytics Reference Documentation
+url = https://doc.qt.io/QtAnalytics
+version = $QT_VERSION
+
+sources.fileextensions = "*.cpp *.qdoc *.mm *.qml"
+headers.fileextensions = "*.h *.ch *.h++ *.hh *.hpp *.hxx"
+
+examples.fileextensions = "*.cpp *.h *.js *.xq *.svg *.xml *.ui *.qhp *.qhcp *.qml"
+examples.imageextensions = "*.png *.jpeg *.jpg *.gif *.mng"
+
+exampledirs = ../examples ../src
+
+headerdirs = \
+    ../src
+
+sourcedirs += \
+    . \
+    ../src \
+    ../examples
+
+imagedirs = images
+
+qhp.projects                    = QtAnalytics
+qhp.QtAnalytics.file                = qtanalytics.qhp
+qhp.QtAnalytics.namespace           = io.qt.qtanalytics.$QT_VERSION_TAG
+qhp.QtAnalytics.virtualFolder       = qtanalytics
+qhp.QtAnalytics.indexTitle          = Qt Analytics
+qhp.QtAnalytics.indexRoot           =
+
+qhp.QtAnalytics.filterAttributes = QtAnalytics $QT_VERSION
+qhp.QtAnalytics.customFilters.QtAnalytics.name = QtAnalytics $QT_VERSION
+qhp.QtAnalytics.customFilters.QtAnalytics.filterAttributes = QtAnalytics $QT_VERSION
+
+qhp.QtAnalytics.subprojects = manual
+qhp.QtAnalytics.subprojects.manual.title = Qt Analytics
+qhp.QtAnalytics.subprojects.manual.indexTitle = Qt Analytics
+qhp.QtAnalytics.subprojects.manual.type = manual
+
+navigation.homepage = "Qt Automotive Suite"
+navigation.landingpage = "Qt Analytics"
+buildversion = "Qt Analytics $QT_VERSION"

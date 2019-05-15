@@ -1,0 +1,21 @@
+version: '3'
+services:
+  db:
+    image: mariadb
+    environment:
+      - MYSQL_ROOT_PASSWORD=securepassword
+    volumes:
+      - 'db_data:/var/lib/mysql'
+  app:
+    image: matomo
+    ports:
+      - '8080:80'
+    volumes:
+      - 'app_data:/var/www/html/config:rw'
+    depends_on:
+      - db
+volumes:
+  db_data:
+    driver: local
+  app_data:
+    driver: local

@@ -1,0 +1,133 @@
+/****************************************************************************
+**
+** Copyright (C) 2019 Luxoft Sweden AB
+**
+** Contact: https://www.qt.io/licensing/
+**
+** This file is part of the QtAnalytics plugin.
+**
+** $QT_BEGIN_LICENSE:GPL-QTAS$
+** Commercial License Usage
+** Licensees holding valid commercial Qt Automotive Suite licenses may use
+** this file in accordance with the commercial license agreement provided
+** with the Software or, alternatively, in accordance with the terms
+** contained in a written agreement between you and The Qt Company.  For
+** licensing terms and conditions see https://www.qt.io/terms-conditions.
+** For further information use the contact form at https://www.qt.io/contact-us.
+**
+** GNU General Public License Usage
+** Alternatively, this file may be used under the terms of the GNU
+** General Public License version 3 or (at your option) any later version
+** approved by the KDE Free Qt Foundation. The licenses are as published by
+** the Free Software Foundation and appearing in the file LICENSE.GPL3
+** included in the packaging of this file. Please review the following
+** information to ensure the GNU General Public License requirements will
+** be met: https://www.gnu.org/licenses/gpl-3.0.html.
+**
+** $QT_END_LICENSE$
+**
+** SPDX-License-Identifier: GPL-3.0
+**
+****************************************************************************/
+
+/*!
+
+\page qtanalytics-concepts.html
+\title Concepts
+
+\section1 Tracking
+
+What do we want to track?
+
+We want mostly track page views and actions, as also general device
+information.
+
+\section1 ConfigUtil
+
+\l ConfigUtil provides utility function to load and parse JSON based
+configuration files. The file lookup is based on a given name (e.g.
+\c {analytics}) and the lookup looks first for an environment variable
+called \c {ANALYTICS_CONFIG}, and if exists will take that path. If not
+then a file will be looked in the resource file named \c {:/analytics.json}.
+If this also not exists a warning is printed and the configuration is
+not successful.
+
+\section1 \l {Context} {Context}
+
+The \l Context object provides the methods available to the builders. It is
+reused across all hits. It provides a configuration value access as also network
+HTTP GET/POST methods.
+
+In general it should be possible to have a Context interface which could
+then be used inside the hit builders and by this making them more
+testable.
+
+The configuration is stored into a JSON file (e.g. analytics.json) which
+is looked up using the ConfigUtil functions.
+
+\sa {Context}, {IContext}
+
+\section1 \l {HitBuilder} {Hit Builder}
+
+The hit builder is an interface used to collect the various tracking
+information and then send the information away using a network.
+
+The hit builder has a common high level API to be shared across specific
+builders.
+
+\list
+\li send build trackVisit trackEvent
+\endlist
+
+\sa {HitBuilder}, {MatomoBuilder}, {GoogleBuilder}
+
+\section1 \l {MatomoBuilder} {Matomo Hit Builder}
+
+\list
+\li \l {https://developer.matomo.org/api-reference/tracking-api}
+\endlist
+
+The Matomo hit builder is enabled by setting tracker to "matomo" in the
+configuration file. The builder support visit and event tracking. It
+uses a GET request to the server URL to send the tracking information.
+
+\section1 \l {GoogleBuilder} {Google Analytics Tracking}
+
+\list
+\li \l {https://developers.google.com/analytics/devguides/collection/protocol/v1/}
+\li \l {https://ga-dev-tools.appspot.com/hit-builder/}
+\endlist
+
+The Google hit builder is enabled by setting the tracker to "google". It
+uses the Google measurements protocol.
+
+\section1 Configuration Format
+
+The configuration is stored in JSON documents. The document keys change with the chosen \c tracker (e.g. \c matomo, \c google).
+
+\note It is not possible currently to support several trackers.
+
+\section2 Google Configuration
+
+\code
+{
+    "tracker": "google"
+    "tid": "UA-555555555-5",
+    "cid": "555",
+    "deviceResolution": "1280x800",
+    "domain": "http://example.org",
+}
+\endcode
+
+\section2 Matomo Configuration
+
+\code
+{
+    "tracker": "matomo",
+    "server": "http://localhost:8000/piwik.php",
+    "idsite": "1"
+}
+\endcode
+
+
+*/
